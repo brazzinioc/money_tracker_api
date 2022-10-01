@@ -1,0 +1,186 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  DatabaseHostnameReader:
+    Type: String
+    Description: Database hostname reader
+    Default: localhost
+  DatabaseHostnameWriter:
+    Type: String
+    Description: Database hostname writer
+    Default: localhost
+  DatabaseUsername:
+    Type: String
+    Description: Database username
+    Default: 'root'
+  DatabasePassword:
+    Type: String
+    Description: Database password
+    Default: root
+  DatabaseName:
+    Type: String
+    Description: Database name
+    Default: main
+  DatabasePort:
+    Type: String
+    Description: Database port
+    Default: 3306
+  SecurityGroup:
+    Type: String
+    Description: Security group id
+  Subnet1:
+    Type: String
+    Description: Subnet 1
+  Subnet2:
+    Type: String
+    Description: Subnet 2
+  Subnet3:
+    Type: String
+    Description: Subnet 3
+
+Globals:
+  Function:
+    Timeout: 60
+    Runtime: nodejs16.x
+    Environment:
+      Variables:
+        DB_HOSTNAME_READER: !Ref DatabaseHostnameReader
+        DB_HOSTNAME_WRITER: !Ref DatabaseHostnameWriter
+        DB_USERNAME: !Ref DatabaseUsername
+        DB_PASSWORD: !Ref DatabasePassword
+        DB_NAME: !Ref DatabaseName
+        DB_PORT: !Ref DatabasePort
+    VpcConfig:
+      SecurityGroupIds:
+        - !Ref SecurityGroup
+      SubnetIds:
+        - !Ref Subnet1
+        - !Ref Subnet2
+        - !Ref Subnet3
+
+Resources:
+  GetCategories:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: src/main.getCategories
+      Events:
+        apiGateway:
+          Type: Api
+          Properties:
+            Path: /v1/categories
+            Method: GET
+          Cors:
+            AllowMethods: "'GET'"
+            AllowHeaders: "'X-Forwarded-For'"
+            AllowOrigin: "'*'"
+            AllowHeaders: "'*'"
+            MaxAge: "'600'"
+
+  GetSubCategories:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: src/main.getSubCategories
+      Events:
+        apiGateway:
+          Type: Api
+          Properties:
+            Path: /v1/subcategories
+            Method: GET
+          Cors:
+            AllowMethods: "'GET'"
+            AllowHeaders: "'X-Forwarded-For'"
+            AllowOrigin: "'*'"
+            AllowHeaders: "'*'"
+            MaxAge: "'600'"
+
+
+
+  GetMovementsType:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: src/main.getMovementsType
+      Events:
+        apiGateway:
+          Type: Api
+          Properties:
+            Path: /v1/movementstype
+            Method: GET
+          Cors:
+            AllowMethods: "'GET'"
+            AllowHeaders: "'X-Forwarded-For'"
+            AllowOrigin: "'*'"
+            AllowHeaders: "'*'"
+            MaxAge: "'600'"
+
+  GetPaymentsType:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: src/main.getPaymentsType
+      Events:
+        apiGateway:
+          Type: Api
+          Properties:
+            Path: /v1/paymentstype
+            Method: GET
+          Cors:
+            AllowMethods: "'GET'"
+            AllowHeaders: "'X-Forwarded-For'"
+            AllowOrigin: "'*'"
+            AllowHeaders: "'*'"
+            MaxAge: "'600'"
+
+  GetMovements:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: src/main.getMovements
+      Events:
+        apiGateway:
+          Type: Api
+          Properties:
+            Path: /v1/movements
+            Method: GET
+          Cors:
+            AllowMethods: "'GET'"
+            AllowHeaders: "'X-Forwarded-For'"
+            AllowOrigin: "'*'"
+            AllowHeaders: "'*'"
+            MaxAge: "'600'"
+
+  CreateMovement:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: src/main.createMovement
+      Events:
+        apiGateway:
+          Type: Api
+          Properties:
+            Path: /v1/movements
+            Method: POST
+          Cors:
+            AllowMethods: "'POST, OPTIONS'"
+            AllowOrigin: "'*'"
+            AllowHeaders: "'*'"
+            MaxAge: "'600'"
+
+  helloWordl:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: src/main.helloWordl
+      Events:
+        apiGateway:
+          Type: Api
+          Properties:
+            Path: /v1/helloworld
+            Method: GET
+          Cors:
+            AllowMethods: "'GET'"
+            AllowHeaders: "'X-Forwarded-For'"
+            AllowOrigin: "'*'"
+            AllowHeaders: "'*'"
+            MaxAge: "'600'"
+
+Outputs:
+  apiEndpoint:
+    Description: Endpoint for Serverless API
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Stage/v1/"
