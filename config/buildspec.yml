@@ -16,4 +16,4 @@ phases:
   post_build:
     commands:
       - echo "Post-build stage..."
-      - sam deploy --stack-name ${STACK_NAME} --region ${AWS_REGION} --s3-bucket ${S3_BUCKET} --parameter-overrides DatabaseHostnameReader=${DB_HOSTNAME_READER} DatabaseHostnameWriter=${DB_HOSTNAME_WRITER} DatabaseUsername=${DB_USERNAME} DatabasePassword=${DB_PASSWORD} DatabaseName=${DB_NAME} DatabasePort=${DB_PORT} SecurityGroup=${SECURITY_GROUP} Subnet1=${SUBNET_1} Subnet2=${SUBNET_2} Subnet3=${SUBNET_3}
+      - sam deploy --stack-name ${STACK_NAME} --region ${AWS_REGION} --s3-bucket ${S3_BUCKET} --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-overrides DatabaseHostnameReader=${DB_HOSTNAME_READER} DatabaseHostnameWriter=${DB_HOSTNAME_WRITER} DatabaseUsername=${DB_USERNAME} DatabasePassword=${DB_PASSWORD} DatabaseName=${DB_NAME} DatabasePort=${DB_PORT} SecurityGroup=${SECURITY_GROUP} Subnet1=${SUBNET_1} Subnet2=${SUBNET_2} Subnet3=${SUBNET_3}
