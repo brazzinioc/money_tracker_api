@@ -16,3 +16,5 @@ phases:
       #- sam deploy --stack-name ${STACK_NAME} --region ${AWS_REGION} --parameters-overrides DatabaseHostnameReader=${DB_HOSTNAME_READER} DatabaseHostnameWriter=${DB_HOSTNAME_WRITER} DatabaseUsername=${DB_USERNAME} DatabasePassword=${DB_PASSWORD} DatabaseName=${DB_NAME} DatabasePort=${DB_PORT} SecurityGroup=${SECURITY_GROUP} Subnet1=${SUBNET_1} Subnet2=${SUBNET_2} Subnet3=${SUBNET_3}
       - sam package --template-file template.yml --s3-bucket ${S3_BUCKET_FOR_PACKAGE} --output-template-file packaged.yml --region ${AWS_REGION}
       - sam deploy --template-file packaged.yml --stack-name ${STACK_NAME} --region ${AWS_REGION} --parameters-overrides DatabaseHostnameReader=${DB_HOSTNAME_READER} DatabaseHostnameWriter=${DB_HOSTNAME_WRITER} DatabaseUsername=${DB_USERNAME} DatabasePassword=${DB_PASSWORD} DatabaseName=${DB_NAME} DatabasePort=${DB_PORT} SecurityGroup=${SECURITY_GROUP} Subnet1=${SUBNET_1} Subnet2=${SUBNET_2} Subnet3=${SUBNET_3}
+
+
