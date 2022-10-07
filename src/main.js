@@ -42,6 +42,7 @@ const helloWordl = async (event) => {
       name: 'John',
       lastname: 'Doe Doe Doe Doe Doe',
       city: 'New York',
+      nickname: 'Johny',
       message: 'Hello World!',
       event_data: event,
     }),
