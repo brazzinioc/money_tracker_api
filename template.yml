@@ -163,23 +163,6 @@ Resources:
             AllowHeaders: "'*'"
             MaxAge: "'600'"
 
-  helloWordl:
-    Type: 'AWS::Serverless::Function'
-    Properties:
-      Handler: src/main.helloWordl
-      Events:
-        apiGateway:
-          Type: Api
-          Properties:
-            Path: /v1/helloworld
-            Method: GET
-          Cors:
-            AllowMethods: "'GET'"
-            AllowHeaders: "'X-Forwarded-For'"
-            AllowOrigin: "'*'"
-            AllowHeaders: "'*'"
-            MaxAge: "'600'"
-
 Outputs:
   apiEndpoint:
     Description: Endpoint for Serverless API

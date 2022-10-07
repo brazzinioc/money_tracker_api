@@ -34,21 +34,6 @@ const createMovement = async (event) => {
   return response;
 };
 
-const helloWordl = async (event) => {
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify({
-      age: 12,
-      name: 'John',
-      lastname: 'Doe Doe Doe Doe Doe',
-      city: 'New York',
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      event_data: event,
-    }),
-  };
-  return response;
-};
-
 module.exports = {
   getCategories,
   getSubCategories,
@@ -56,5 +41,4 @@ module.exports = {
   getPaymentsType,
   getMovements,
   createMovement,
-  helloWordl,
 };
