@@ -41,6 +41,7 @@ const helloWordl = async (event) => {
       age: 12,
       name: 'John',
       lastname: 'Doe Doe Doe Doe Doe',
+      city: 'New York',
       message: 'Go Serverless v1.0! Your function executed successfully!',
       event_data: event,
     }),
