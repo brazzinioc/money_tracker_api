@@ -94,8 +94,6 @@ Resources:
             AllowHeaders: "'*'"
             MaxAge: "'600'"
 
-
-
   GetMovementsType:
     Type: 'AWS::Serverless::Function'
     Properties:
